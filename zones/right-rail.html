@@ -13,14 +13,18 @@
     .weather-kicker { grid-column: 1 / -1; color: #8ad7ff; font-size: clamp(10px, 3.1vw, 42px); font-weight: 900; text-transform: uppercase; }
     .weather-temp { align-self: center; font-size: clamp(42px, 12.8vw, 150px); line-height: .9; font-weight: 950; font-variant-numeric: tabular-nums; }
     .weather-icon { align-self: center; justify-self: end; position: relative; width: 22.4vw; height: 10.5vh; display: grid; place-items: center; background: rgba(255,255,255,.16); border-left: .9vw solid #8ad7ff; overflow: hidden; }
-    .weather-symbol { position: relative; width: 55%; height: 55%; }
+    .weather-symbol { --sun: #ffd53d; --cloud: #fff; --rain: #8ad7ff; --mist: #d9e9ff; position: relative; width: min(68%, 9.2vh); aspect-ratio: 1 / 1; }
     .weather-symbol::before, .weather-symbol::after { content: ""; position: absolute; display: block; }
-    .weather-symbol.cloud::before, .weather-symbol.rain::before, .weather-symbol.drizzle::before, .weather-symbol.snow::before, .weather-symbol.storm::before { width: 66%; height: 38%; left: 14%; top: 42%; border-radius: 999px; background: #fff; box-shadow: 24% -30% 0 10% #fff, 48% -17% 0 4% #fff; }
-    .weather-symbol.sun::before { width: 70%; height: 70%; left: 15%; top: 15%; border-radius: 50%; background: #ffd45a; box-shadow: 0 0 1.2em rgba(255,212,90,.45); }
-    .weather-symbol.rain::after, .weather-symbol.drizzle::after { width: 8%; height: 32%; left: 19%; top: 58%; border-radius: 4px; background: #8ad7ff; box-shadow: 1em .35em 0 #8ad7ff, 2em 0 0 #8ad7ff; transform: skewX(-15deg); }
-    .weather-symbol.snow::after { width: 10%; height: 10%; left: 18%; top: 63%; border-radius: 50%; background: #fff; box-shadow: 1em .45em 0 #fff, 2.1em 0 0 #fff; }
-    .weather-symbol.fog { width: 65%; height: 6%; border-radius: 5px; background: #d9e9ff; box-shadow: 0 1em 0 #d9e9ff, 0 2em 0 #d9e9ff; }
-    .weather-symbol.storm::after { width: 34%; height: 52%; left: 32%; top: 47%; background: #ffd45a; clip-path: polygon(45% 0,100% 0,64% 43%,100% 43%,28% 100%,45% 56%,12% 56%); }
+    .weather-symbol.sun::before { width: 52%; height: 52%; left: 24%; top: 24%; border-radius: 50%; background: var(--sun); box-shadow: 0 0 .78em rgba(255,213,61,.72); }
+    .weather-symbol.sun::after { inset: 0; border-radius: 50%; background: repeating-conic-gradient(from 0deg, var(--sun) 0 10deg, transparent 10deg 28deg); -webkit-mask: radial-gradient(circle, transparent 0 43%, #000 45% 72%, transparent 74%); mask: radial-gradient(circle, transparent 0 43%, #000 45% 72%, transparent 74%); }
+    .weather-symbol.cloud::before, .weather-symbol.rain::before, .weather-symbol.drizzle::before, .weather-symbol.snow::before, .weather-symbol.storm::before { width: 66%; height: 34%; left: 16%; top: 42%; border-radius: 999px; background: var(--cloud); box-shadow: 18% -38% 0 11% var(--cloud), 45% -24% 0 18% var(--cloud), 70% -4% 0 7% var(--cloud); }
+    .weather-symbol.cloud::after { width: 36%; height: 36%; left: 5%; top: 18%; border-radius: 50%; background: rgba(255,213,61,.95); box-shadow: 0 0 .7em rgba(255,213,61,.45); }
+    .weather-symbol.rain::after, .weather-symbol.drizzle::after { width: 7%; height: 30%; left: 22%; top: 64%; border-radius: 999px; background: var(--rain); box-shadow: .78em .24em 0 var(--rain), 1.56em -.05em 0 var(--rain), 2.34em .18em 0 var(--rain); transform: skewX(-18deg); }
+    .weather-symbol.drizzle::after { height: 19%; opacity: .78; }
+    .weather-symbol.snow::after { width: 12%; height: 12%; left: 20%; top: 66%; border-radius: 50%; background: var(--cloud); box-shadow: .86em .36em 0 var(--cloud), 1.72em -.03em 0 var(--cloud), 2.42em .44em 0 var(--cloud); }
+    .weather-symbol.fog::before { width: 82%; height: 8%; left: 9%; top: 30%; border-radius: 999px; background: var(--mist); box-shadow: -.18em 1em 0 var(--mist), .36em 2em 0 var(--mist), -.08em 3em 0 var(--mist); }
+    .weather-symbol.fog::after { width: 58%; height: 8%; left: 21%; top: 12%; border-radius: 999px; background: rgba(217,233,255,.6); }
+    .weather-symbol.storm::after { width: 42%; height: 58%; left: 32%; top: 46%; background: var(--sun); clip-path: polygon(43% 0,100% 0,66% 39%,98% 39%,22% 100%,42% 54%,8% 54%); filter: drop-shadow(0 0 .28em rgba(255,213,61,.55)); }
     .weather-meta { grid-column: 1 / -1; display: grid; gap: .45vh; color: #d9e9ff; font-size: clamp(10px, 2.8vw, 38px); font-weight: 850; text-transform: uppercase; }
     .weather-meta span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .news-card { display: grid; grid-template-rows: minmax(0, 1fr) 53.4%; min-height: 0; border-bottom: 1px solid #d6dde5; overflow: hidden; }
