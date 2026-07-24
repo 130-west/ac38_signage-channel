@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AC38 Bottom Zone - Meet The Teams</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #07101a; font-family: Inter, Arial, Helvetica, sans-serif; }
+    .bottom { width: 100vw; height: 100vh; display: grid; grid-template-rows: 68.254% 31.746%; }
+    .team-bar { display: grid; grid-template-columns: 13.906% repeat(6, minmax(0, 1fr)); align-items: stretch; background: #f7fbff; color: #07101a; }
+    .team-section { display: grid; align-content: center; justify-items: center; background: #d71920; color: #fff; font-size: clamp(19px, 1.85vw, 76px); line-height: .9; font-weight: 950; text-align: center; text-transform: uppercase; border-right: .625vw solid #fff; }
+    .team-section strong,
+    .team-section span { display: block; }
+    .team-section small { display: block; margin-top: .42em; color: rgba(255,255,255,.78); font-size: .31em; line-height: 1.05; max-width: 86%; }
+    .crew-card { display: grid; grid-template-columns: clamp(46px, 3.8vw, 130px) minmax(0, 1fr); align-items: center; gap: clamp(7px, .64vw, 24px); min-width: 0; padding: 0 clamp(6px, .62vw, 24px); border-right: 1px solid #d9e2ea; background: #f7fbff; overflow: hidden; }
+    .crew-card.is-empty { visibility: hidden; }
+    .crew-photo { width: clamp(46px, 3.8vw, 130px); aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; object-position: center top; border: clamp(2px, .16vw, 6px) solid #071725; background: #d8e1ea; display: block; }
+    .crew-copy { min-width: 0; }
+    .crew-name { color: #071725; font-size: clamp(11px, .9vw, 34px); line-height: 1.03; font-weight: 950; text-transform: uppercase; }
+    .crew-role { margin-top: .35em; color: #607080; font-size: clamp(8px, .62vw, 23px); font-weight: 850; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .team-logo-box { display: grid; grid-template-columns: clamp(46px, 3.8vw, 130px) minmax(0, 1fr); align-items: center; gap: clamp(7px, .64vw, 24px); min-width: 0; padding: 0 clamp(6px, .62vw, 24px); background: #f7fbff; border-left: 1px solid #d9e2ea; overflow: hidden; }
+    .team-flag { display: none; }
+    .team-logo-medallion { width: clamp(46px, 3.8vw, 130px); aspect-ratio: 1 / 1; border-radius: 50%; border: clamp(2px, .16vw, 6px) solid #071725; background: #071725; display: grid; place-items: center; overflow: hidden; }
+    .team-logo { width: 100%; height: 100%; object-fit: cover; object-position: 14% center; display: block; transform: none; }
+    .team-id-copy { min-width: 0; }
+    .team-id-name { color: #071725; font-size: clamp(10px, .82vw, 31px); line-height: 1.03; font-weight: 950; text-transform: uppercase; }
+    .team-id-role { margin-top: .35em; color: #607080; font-size: clamp(8px, .62vw, 23px); font-weight: 850; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ticker { display: grid; grid-template-columns: calc(13.906% - .625vw) 1fr; align-items: center; background: #07101a; color: #fff; overflow: hidden; border-top: .32vh solid #fff; font-size: clamp(18px, 1.56vw, 64px); font-weight: 850; }
+    .ticker-label { height: 100%; display: grid; place-items: center; background: #009246; color: #fff; font-size: clamp(16px, 1.4vw, 58px); font-weight: 950; text-transform: uppercase; }
+    .ticker-track { display: flex; align-items: center; min-width: 0; overflow: hidden; white-space: nowrap; transform: translateZ(0); }
+    .ticker-content { display: flex; width: max-content; min-width: 100%; will-change: transform; backface-visibility: hidden; transform: translate3d(0, 0, 0); animation: ticker-crawl 92s linear infinite; }
+    .ticker-content span { flex: 0 0 auto; padding: 0; margin-right: 4.2vw; white-space: nowrap; }
+    .ticker-content b { margin-right: .8vw; color: #ce2b37; text-transform: uppercase; }
+    @keyframes ticker-crawl { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+  </style>
+</head>
+<body>
+  <div class="bottom">
+    <section class="team-bar">
+      <div class="team-section">
+        <strong>Meet</strong>
+        <span>The Team</span>
+        <small id="teamName">Emirates Team New Zealand</small>
+      </div>
+      <article class="crew-card">
+        <img class="crew-photo" id="crewPhoto0" alt="">
+        <div class="crew-copy"><div class="crew-name" id="crewName0"></div><div class="crew-role" id="crewRole0"></div></div>
+      </article>
+      <article class="crew-card">
+        <img class="crew-photo" id="crewPhoto1" alt="">
+        <div class="crew-copy"><div class="crew-name" id="crewName1"></div><div class="crew-role" id="crewRole1"></div></div>
+      </article>
+      <article class="crew-card">
+        <img class="crew-photo" id="crewPhoto2" alt="">
+        <div class="crew-copy"><div class="crew-name" id="crewName2"></div><div class="crew-role" id="crewRole2"></div></div>
+      </article>
+      <article class="crew-card">
+        <img class="crew-photo" id="crewPhoto3" alt="">
+        <div class="crew-copy"><div class="crew-name" id="crewName3"></div><div class="crew-role" id="crewRole3"></div></div>
+      </article>
+      <article class="crew-card">
+        <img class="crew-photo" id="crewPhoto4" alt="">
+        <div class="crew-copy"><div class="crew-name" id="crewName4"></div><div class="crew-role" id="crewRole4"></div></div>
+      </article>
+      <div class="team-logo-box">
+        <div class="team-logo-medallion"><img class="team-logo" id="teamLogo" alt=""></div>
+        <div class="team-id-copy"><div class="team-id-name" id="teamIdentityName"></div><div class="team-id-role">Team Logo</div></div>
+        <div class="team-flag" id="teamFlag"></div>
+      </div>
+    </section>
+    <section class="ticker"><div class="ticker-label">Top News</div><div class="ticker-track"><div class="ticker-content" id="tickerContent"></div></div></section>
+  </div>
+  <script>
+    const teams = [
+      {
+        name: "Emirates Team New Zealand",
+        tag: "ETNZ",
+        flag: "🇳🇿",
+        logo: "https://38th.americascup.com/assets/img/teams/ETNZ.png",
+        crew: [
+          ["Nathan Outteridge", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29288_Nathan-1.jpg"],
+          ["Seb Menzies", "Helm", "https://www.americascup.com/original/m29287_Seb-1.jpg"],
+          ["Andy Maloney", "Trimmer", "https://www.americascup.com/original/m29286_Andy-1.jpg"],
+          ["Iain Jensen", "Trimmer", "https://www.americascup.com/original/m29285_Iain-1.jpg"],
+          ["Josh Armit", "Sailor", "https://www.americascup.com/original/m29320_Armit.jpg"]
+        ]
+      },
+      {
+        name: "La Roche-Posay Racing Team",
+        tag: "RPRT",
+        flag: "🇫🇷",
+        logo: "https://38th.americascup.com/assets/img/teams/RPRT.png",
+        crew: [
+          ["Quentin Delapierre", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29280_Quentin.jpg"],
+          ["Diego Botin", "Port Helm", "https://www.americascup.com/original/m29279_DiegoBotin-1.jpg"],
+          ["Jason Saunders", "Starboard Trim", "https://www.americascup.com/original/m29283_Jason.jpg"],
+          ["Florian Trittel", "Port Trim", "https://www.americascup.com/original/m29281_Trittel.jpg"],
+          ["Enzo Balanger", "Reserve Helm", "https://www.americascup.com/original/m29284_Enzo.jpg"]
+        ]
+      },
+      {
+        name: "Tudor Team Alinghi",
+        tag: "TTA",
+        flag: "🇨🇭",
+        logo: "https://38th.americascup.com/assets/img/teams/TTA.png",
+        crew: [
+          ["Paul Goodison", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29324_Goodison-1.jpg"],
+          ["Phil Robertson", "Port Helm", "https://www.americascup.com/original/m29325_Robertson.jpg"],
+          ["Pietro Sibello", "Trimmer", "https://www.americascup.com/original/m29322_Sibello.jpg"],
+          ["Nico Rolaz", "Trimmer", "https://www.americascup.com/original/m29323_Rolaz-1.jpg"]
+        ]
+      },
+      {
+        name: "Luna Rossa 1 Women & Youth Team",
+        tag: "LR1",
+        flag: "🇮🇹",
+        logo: "https://38th.americascup.com/assets/img/teams/LRC.png",
+        crew: [
+          ["Marco Gradoni", "Helm", "https://www.americascup.com/original/m29309_Gradoni-1.jpg"],
+          ["Margherita Porro", "Helm", "https://www.americascup.com/original/m29310_Porro-1.jpg"],
+          ["Maria Giubilei", "Trimmer", "https://www.americascup.com/original/m29308_Giulibei-1.jpg"],
+          ["Giovanni Santi", "Trim", "https://www.americascup.com/original/m29311_Santii.jpg"],
+          ["Gianluigi Ugolini", "Helm", "https://www.americascup.com/original/m29317_Ugolini-1.jpg"]
+        ]
+      },
+      {
+        name: "Luna Rossa 2 Principal Team",
+        tag: "LR2",
+        flag: "🇮🇹",
+        logo: "https://38th.americascup.com/assets/img/teams/LRC.png",
+        crew: [
+          ["Peter Burling", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29315_Burling-1.jpg"],
+          ["Ruggero Tita", "Helm", "https://www.americascup.com/original/m29316_Ruggero-1.jpg"],
+          ["Umberto Molineris", "Trimmer", "https://www.americascup.com/original/m29313_Molineris-1.jpg"],
+          ["Vittorio Bissaro", "Trimmer", "https://www.americascup.com/original/m29314_Bissaro-1.jpg"],
+          ["Gianluigi Ugolini", "Helm", "https://www.americascup.com/original/m29317_Ugolini-1.jpg"]
+        ]
+      },
+      {
+        name: "Athena Pathway Women & Youth Team",
+        tag: "ATHENA",
+        flag: "🇬🇧",
+        logo: "https://38th.americascup.com/assets/img/teams/APWY.png",
+        crew: [
+          ["Hannah Mills OBE", "Skipper / Helm", "https://www.americascup.com/original/m29339_Hannah.jpg"],
+          ["Ellie Aldridge", "Helm", "https://www.americascup.com/original/m29338_Ellie.jpg"],
+          ["Sam Webb", "Starboard Trimmer", "https://www.americascup.com/original/m29341_Webb.jpg"],
+          ["Matt Beck", "Port Trimmer", "https://www.americascup.com/original/m29340_Beck.jpg"]
+        ]
+      },
+      {
+        name: "GB1",
+        tag: "GB1",
+        flag: "🇬🇧",
+        logo: "https://38th.americascup.com/assets/img/teams/GB1.png",
+        crew: [
+          ["Dylan Fletcher", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29319_Fletcher.jpg"],
+          ["Ben Cornish", "Port Helm", "https://www.americascup.com/original/m29335_Cornish.jpg"],
+          ["Bleddyn Mon", "Port Trimmer", "https://www.americascup.com/original/m29337_Bledyn.jpg"],
+          ["Andrea Tesei", "Starboard Trimmer", "https://www.americascup.com/original/m29336_Tesei.jpg"]
+        ]
+      },
+      {
+        name: "Emirates Team New Zealand Women & Youth",
+        tag: "ETNZ WY",
+        flag: "🇳🇿",
+        logo: "https://38th.americascup.com/assets/img/teams/ETNZ.png",
+        crew: [
+          ["Jake Pye", "Skipper / Helm", "https://www.americascup.com/original/m29321_Pye.jpg"],
+          ["Erica Dawson", "Helm", "https://www.americascup.com/original/m29332_Erica.jpg"],
+          ["Serena Woodall", "Trimmer", "https://www.americascup.com/original/m29331_Woodal.jpg"],
+          ["Josh Armit", "Trimmer", "https://www.americascup.com/original/m29320_Armit.jpg"]
+        ]
+      }
+    ];
+
+    function renderTeam(index) {
+      const team = teams[index % teams.length];
+      teamName.textContent = team.name;
+      teamIdentityName.textContent = team.name;
+      teamFlag.textContent = team.flag || "";
+      teamLogo.src = team.logo;
+      teamLogo.alt = team.name;
+      teamLogo.style.visibility = "visible";
+      teamLogo.onerror = () => {
+        teamLogo.style.visibility = "hidden";
+      };
+      for (let memberIndex = 0; memberIndex < 5; memberIndex++) {
+        const member = team.crew[memberIndex];
+        const photo = document.getElementById("crewPhoto" + memberIndex);
+        const card = photo.closest(".crew-card");
+        if (!member) {
+          card.classList.add("is-empty");
+          photo.removeAttribute("src");
+          photo.alt = "";
+          document.getElementById("crewName" + memberIndex).textContent = "";
+          document.getElementById("crewRole" + memberIndex).textContent = "";
+          continue;
+        }
+        card.classList.remove("is-empty");
+        document.getElementById("crewName" + memberIndex).textContent = member[0];
+        document.getElementById("crewRole" + memberIndex).textContent = member[1];
+        photo.style.objectFit = "cover";
+        photo.style.padding = "0";
+        photo.onerror = () => {
+          photo.onerror = null;
+          photo.src = team.logo;
+          photo.style.objectFit = "contain";
+          photo.style.padding = "14%";
+        };
+        photo.src = member[2];
+        photo.alt = member[0];
+      }
+      renderHeadlines([
+        team.name + " crew profile: " + team.crew.map(member => member[0]).join(", "),
+        team.crew[0][0] + " leads the " + team.name + " line-up",
+        team.crew[1][0] + " and " + team.crew[2][0] + " feature in the AC38 squad"
+      ], team.tag);
+    }
+
+    function renderHeadlines(items, tag) {
+      const ticker = items.map(item => "<span><b>" + tag + "</b>" + item + "</span>").join("");
+      tickerContent.innerHTML = ticker + ticker;
+    }
+
+    let teamIndex = 0;
+    renderTeam(teamIndex);
+    setInterval(() => {
+      teamIndex = (teamIndex + 1) % teams.length;
+      renderTeam(teamIndex);
+    }, 12000);
+  </script>
+</body>
+</html>

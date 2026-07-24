@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AC38 Bottom Zone - Crawling Ticker</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #07101a; font-family: Inter, Arial, Helvetica, sans-serif; }
+    .bottom { width: 100vw; height: 100vh; display: grid; grid-template-rows: 68.254% 31.746%; }
+    .scorebar { display: grid; grid-template-columns: 13.906% repeat(4, minmax(0, 1fr)) 6.75%; align-items: stretch; background: #f7fbff; color: #07101a; }
+    .score-section { display: grid; align-content: center; justify-items: center; background: #d71920; color: #fff; font-size: clamp(18px, 1.72vw, 72px); line-height: .95; font-weight: 950; text-align: center; text-transform: uppercase; border-right: .625vw solid #fff; }
+    .score-section span { margin-top: .2em; color: rgba(255,255,255,.78); font-size: .45em; line-height: 1; }
+    .standing { display: grid; grid-template-columns: clamp(24px, 2vw, 64px) clamp(38px, 3.05vw, 92px) minmax(0, 1fr) clamp(34px, 2.8vw, 86px); align-items: center; gap: clamp(6px, .62vw, 22px); min-width: 0; padding: 0 clamp(7px, .78vw, 28px); border-right: 1px solid #d9e2ea; background: #f7fbff; }
+    .standing-position { display: grid; place-items: center; width: clamp(24px, 2vw, 64px); height: clamp(28px, 2.35vw, 76px); background: #071725; color: #fff; font-size: clamp(13px, 1.02vw, 38px); font-weight: 950; font-variant-numeric: tabular-nums; }
+    .standing-flag { font-size: clamp(24px, 2.12vw, 74px); line-height: 1; align-self: center; justify-self: center; }
+    .standing-team { min-width: 0; }
+    .standing-name { overflow: hidden; color: #071725; font-size: clamp(12px, .92vw, 36px); line-height: 1.08; font-weight: 950; text-transform: uppercase; }
+    .standing-name span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .standing-note { margin-top: .25em; color: #607080; font-size: clamp(9px, .7vw, 26px); font-weight: 800; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .standing-points { justify-self: end; color: #d71920; font-size: clamp(20px, 1.72vw, 72px); font-weight: 950; font-variant-numeric: tabular-nums; }
+    .status-box { display: grid; place-items: center; padding: 0 .75vw; background: #e8eef4; color: #273645; font-size: clamp(10px, .86vw, 32px); font-weight: 950; text-align: center; text-transform: uppercase; }
+    .ticker { display: grid; grid-template-columns: calc(13.906% - .625vw) 1fr; align-items: center; background: #07101a; color: #fff; overflow: hidden; border-top: .32vh solid #fff; font-size: clamp(18px, 1.56vw, 64px); font-weight: 850; }
+    .ticker-label { height: 100%; display: grid; place-items: center; background: #009246; color: #fff; font-size: clamp(16px, 1.4vw, 58px); font-weight: 950; text-transform: uppercase; }
+    .ticker-track { display: flex; align-items: center; min-width: 0; overflow: hidden; white-space: nowrap; transform: translateZ(0); }
+    .ticker-content { display: flex; width: max-content; min-width: 100%; will-change: transform; backface-visibility: hidden; transform: translate3d(0, 0, 0); animation: ticker-crawl 92s linear infinite; }
+    .ticker-content span { flex: 0 0 auto; padding: 0; margin-right: 4.2vw; white-space: nowrap; }
+    .ticker-content b { margin-right: .8vw; color: #ce2b37; text-transform: uppercase; }
+    @keyframes ticker-crawl { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+  </style>
+</head>
+<body>
+  <div class="bottom">
+    <section class="scorebar">
+      <div class="score-section">Latest Standings<span>Cagliari 2026</span></div>
+      <div class="standing"><div class="standing-position">1</div><div class="standing-flag">🇮🇹</div><div class="standing-team"><div class="standing-name"><span>Luna Rossa 2</span><span>Principal Team</span></div><div class="standing-note">Italy</div></div><div class="standing-points">63</div></div>
+      <div class="standing"><div class="standing-position">2</div><div class="standing-flag">🇳🇿</div><div class="standing-team"><div class="standing-name"><span>Emirates</span><span>Team New Zealand</span></div><div class="standing-note">New Zealand</div></div><div class="standing-points">60</div></div>
+      <div class="standing"><div class="standing-position">3</div><div class="standing-flag">🇮🇹</div><div class="standing-team"><div class="standing-name"><span>Luna Rossa 1</span><span>Women & Youth Team</span></div><div class="standing-note">Italy</div></div><div class="standing-points">59</div></div>
+      <div class="standing"><div class="standing-position">4</div><div class="standing-flag">🇫🇷</div><div class="standing-team"><div class="standing-name"><span>La Roche-Posay</span><span>Racing Team</span></div><div class="standing-note">France</div></div><div class="standing-points">55</div></div>
+      <div class="status-box">After<br>PR1</div>
+    </section>
+    <section class="ticker"><div class="ticker-label">Top News</div><div class="ticker-track"><div class="ticker-content" id="tickerContent"></div></div></section>
+  </div>
+  <script>
+    const headlines = ["Emirates Team New Zealand takes their first flight in the Bay of Naples", "Welcoming the America's Cup - the most beautiful ship in the world", "Luna Rossa's first sail in Naples", "First sail for La Roche-Posay Racing Team", "Naples, a natural amphitheatre for the America's Cup"];
+    function renderHeadlines(items) { const ticker = items.map(item => '<span><b>AC38</b>' + item + '</span>').join(''); tickerContent.innerHTML = ticker + ticker; }
+    renderHeadlines(headlines);
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AC38 Header Zone</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #3299c9; font-family: Inter, Arial, Helvetica, sans-serif; }
+    .top-line { position: relative; width: 100vw; height: 100vh; display: grid; grid-template-columns: auto minmax(0, 1fr) 30.5vw; align-items: center; gap: 1.9vw; padding-left: 1.55vw; background: #3299c9; border-bottom: 0.03em solid #fff; color: #071725; text-transform: uppercase; overflow: hidden; }
+    .top-line::after { content: ""; position: absolute; inset: 0 0 0 auto; width: 37vw; background: #071725; clip-path: polygon(19% 0, 100% 0, 100% 100%, 0 100%); z-index: 0; }
+    .brand, .event-strip, .header-omega { position: relative; z-index: 1; }
+    .brand-mark { width: min(18vw, 48vh); height: 76vh; object-fit: contain; object-position: left center; display: block; }
+    .event-strip { min-width: 0; color: #071725; font-size: clamp(22px, 2.5vw, 90px); font-weight: 950; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .header-omega { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 1.9vw; overflow: hidden; }
+    .omega-module { position: relative; width: min(17.2vw, 82vh); height: 100vh; overflow: hidden; transform: translateY(2%); }
+    .omega-module-watch { position: absolute; width: 77.6%; height: auto; left: -16.4%; top: -58.75%; filter: drop-shadow(0 0.45em 0.75em rgba(0,0,0,.35)); }
+    .omega-logo-img { position: absolute; width: 47.5%; height: auto; right: 0; top: 50%; transform: translateY(-50%); display: block; }
+    .omega-hand { position: absolute; width: 23.3%; height: auto; left: 11%; top: 16.25%; transform-origin: 50% 50%; z-index: 2; }
+    .omega-hand-second { width: 27.8%; left: 8.7%; top: 10%; z-index: 3; }
+  </style>
+</head>
+<body>
+  <header class="top-line">
+    <div class="brand"><img class="brand-mark" src="https://www.americascup.com/images/logo-ac38-napoli.svg" alt="Louis Vuitton 38th America's Cup Napoli"></div>
+    <div class="event-strip">America's Cup News Channel</div>
+    <div class="header-omega">
+      <div class="omega-module" aria-label="Omega Official Timekeeper">
+        <img class="omega-module-watch" src="https://www.americascup.com/omega/2026/watch.png" alt="">
+        <img class="omega-hand" id="omegaHeaderHour" src="https://www.americascup.com/omega/2026/hand_hour.png" alt="">
+        <img class="omega-hand" id="omegaHeaderMinute" src="https://www.americascup.com/omega/2026/hand_minute.png" alt="">
+        <img class="omega-hand omega-hand-second" id="omegaHeaderSecond" src="https://www.americascup.com/omega/2026/hand_seconde.png" alt="">
+        <img class="omega-logo-img" src="https://www.americascup.com/omega/2026/logo.svg" alt="Omega Official Timekeeper">
+      </div>
+    </div>
+  </header>
+  <script>
+    const timeZone = "Europe/Rome";
+    function updateClock() {
+      const now = new Date();
+      const parts = new Intl.DateTimeFormat("en-GB", { timeZone, hour: "numeric", minute: "numeric", second: "numeric", hour12: false }).formatToParts(now).reduce((acc, part) => { if (part.type !== "literal") acc[part.type] = Number(part.value); return acc; }, {});
+      const hourAngle = ((parts.hour % 12) * 30) + (parts.minute * 0.5);
+      const minuteAngle = (parts.minute * 6) + (parts.second * 0.1);
+      const secondAngle = parts.second * 6;
+      omegaHeaderHour.style.transform = 'rotate(' + hourAngle + 'deg)';
+      omegaHeaderMinute.style.transform = 'rotate(' + minuteAngle + 'deg)';
+      omegaHeaderSecond.style.transform = 'rotate(' + secondAngle + 'deg)';
+    }
+    updateClock(); setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
