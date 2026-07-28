@@ -4,29 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AC38 Bottom Zone - Meet The Teams</title>
+  <!-- meet-teams-logo-fit-v3 -->
 
   <style>
     * { box-sizing: border-box; }
     html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #07101a; font-family: Inter, Arial, Helvetica, sans-serif; }
     .bottom { width: 100vw; height: 100vh; display: grid; grid-template-rows: 68.254% 31.746%; }
-    .team-bar { display: grid; grid-template-columns: 13.906% repeat(6, minmax(0, 1fr)); align-items: stretch; background: #f7fbff; color: #07101a; }
-    .team-section { display: grid; align-content: center; justify-items: center; background: #d71920; color: #fff; font-size: clamp(19px, 1.85vw, 76px); line-height: .9; font-weight: 950; text-align: center; text-transform: uppercase; border-right: .625vw solid #fff; }
+    .team-bar { display: grid; grid-template-columns: 13.906% repeat(5, minmax(0, 1fr)) 22.344%; align-items: stretch; background: #f7fbff; color: #07101a; }
+    .team-section { display: grid; align-content: center; justify-items: center; background: #d71920; color: #fff; font-size: clamp(16px, 1.4vw, 58px); line-height: .9; font-weight: 950; text-align: center; text-transform: uppercase; border-right: .625vw solid #fff; }
     .team-section strong,
     .team-section span { display: block; }
-    .team-section small { display: block; margin-top: .42em; color: rgba(255,255,255,.78); font-size: .31em; line-height: 1.05; max-width: 86%; }
-    .crew-card { display: grid; grid-template-columns: clamp(46px, 3.8vw, 130px) minmax(0, 1fr); align-items: center; gap: clamp(7px, .64vw, 24px); min-width: 0; padding: 0 clamp(6px, .62vw, 24px); border-right: 1px solid #d9e2ea; background: #f7fbff; overflow: hidden; }
+    .crew-card { display: grid; grid-template-columns: clamp(46px, 3.8vw, 130px) minmax(0, 1fr); align-items: center; gap: clamp(7px, .64vw, 24px); min-width: 0; padding: 0 clamp(6px, .62vw, 24px); background: #f7fbff; overflow: hidden; }
     .crew-card.is-empty { visibility: hidden; }
-    .crew-photo { width: clamp(46px, 3.8vw, 130px); aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; object-position: center top; border: clamp(2px, .16vw, 6px) solid #071725; background: #d8e1ea; display: block; }
-    .crew-copy { min-width: 0; }
+    .crew-photo { grid-column: 1; grid-row: 1; align-self: center; justify-self: center; width: clamp(46px, 3.8vw, 130px); aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; object-position: center top; border: clamp(2px, .16vw, 6px) solid #071725; background: #d8e1ea; display: block; }
+    .crew-photo.is-flag-fallback { display: none; }
+    .crew-flag-fallback { grid-column: 1; grid-row: 1; align-self: center; justify-self: center; width: clamp(46px, 3.8vw, 130px); aspect-ratio: 1 / 1; border-radius: 50%; border: clamp(2px, .16vw, 6px) solid #071725; display: none; place-items: center; font-size: clamp(24px, 2.12vw, 74px); line-height: 1; }
+    .crew-copy { grid-column: 2; grid-row: 1; min-width: 0; }
+    .crew-card.has-flag-fallback .crew-flag-fallback { display: grid; }
     .crew-name { color: #071725; font-size: clamp(11px, .9vw, 34px); line-height: 1.03; font-weight: 950; text-transform: uppercase; }
     .crew-role { margin-top: .35em; color: #607080; font-size: clamp(8px, .62vw, 23px); font-weight: 850; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .team-logo-box { display: grid; grid-template-columns: clamp(46px, 3.8vw, 130px) minmax(0, 1fr); align-items: center; gap: clamp(7px, .64vw, 24px); min-width: 0; padding: 0 clamp(6px, .62vw, 24px); background: #f7fbff; border-left: 1px solid #d9e2ea; overflow: hidden; }
-    .team-flag { display: none; }
-    .team-logo-medallion { width: clamp(46px, 3.8vw, 130px); aspect-ratio: 1 / 1; border-radius: 50%; border: clamp(2px, .16vw, 6px) solid #071725; background: #071725; display: grid; place-items: center; overflow: hidden; }
-    .team-logo { width: 100%; height: 100%; object-fit: cover; object-position: 14% center; display: block; transform: none; }
-    .team-id-copy { min-width: 0; }
-    .team-id-name { color: #071725; font-size: clamp(10px, .82vw, 31px); line-height: 1.03; font-weight: 950; text-transform: uppercase; }
-    .team-id-role { margin-top: .35em; color: #607080; font-size: clamp(8px, .62vw, 23px); font-weight: 850; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .team-logo-box { display: grid; align-items: stretch; justify-items: stretch; min-width: 0; padding: clamp(8px, .72vw, 28px); background: #071725; border-top: .42vh solid #3299c9; border-left: .32vw solid #3299c9; overflow: hidden; }
+    .team-logo-medallion { position: relative; width: 100%; height: 100%; min-height: 0; border: 0; border-radius: 0; background: #071725; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .team-logo-box .team-logo-medallion .team-logo { display: block; width: 92%; height: 88%; max-width: 92%; max-height: 88%; object-fit: contain; object-position: center center; padding: 0; transform: none; }
+    .team-logo-overlay { position: absolute; top: clamp(3px, .28vw, 11px); right: clamp(3px, .28vw, 11px); display: none; align-items: center; justify-items: center; max-width: 46%; padding: .28em .46em .24em; background: rgba(7, 23, 37, .92); border: .08vw solid rgba(50, 153, 201, .75); color: #fff; font-size: clamp(6px, .48vw, 18px); line-height: 1; font-weight: 950; text-align: center; text-transform: uppercase; letter-spacing: 0; }
+    .team-logo-overlay.is-visible { display: grid; }
     .ticker { display: grid; grid-template-columns: calc(13.906% - .625vw) 1fr; align-items: center; background: #07101a; color: #fff; overflow: hidden; border-top: .32vh solid #fff; font-size: clamp(18px, 1.56vw, 64px); font-weight: 850; }
     .ticker-label { height: 100%; display: grid; place-items: center; background: #009246; color: #fff; font-size: clamp(16px, 1.4vw, 58px); font-weight: 950; text-transform: uppercase; }
     .ticker-track { display: flex; align-items: center; min-width: 0; overflow: hidden; white-space: nowrap; transform: translateZ(0); }
@@ -41,33 +42,35 @@
     <section class="team-bar">
       <div class="team-section">
         <strong>Meet</strong>
-        <span>The Team</span>
-        <small id="teamName">Emirates Team New Zealand</small>
+        <span>The Teams</span>
       </div>
       <article class="crew-card">
         <img class="crew-photo" id="crewPhoto0" alt="">
+        <div class="crew-flag-fallback" id="crewFlag0" aria-hidden="true"></div>
         <div class="crew-copy"><div class="crew-name" id="crewName0"></div><div class="crew-role" id="crewRole0"></div></div>
       </article>
       <article class="crew-card">
         <img class="crew-photo" id="crewPhoto1" alt="">
+        <div class="crew-flag-fallback" id="crewFlag1" aria-hidden="true"></div>
         <div class="crew-copy"><div class="crew-name" id="crewName1"></div><div class="crew-role" id="crewRole1"></div></div>
       </article>
       <article class="crew-card">
         <img class="crew-photo" id="crewPhoto2" alt="">
+        <div class="crew-flag-fallback" id="crewFlag2" aria-hidden="true"></div>
         <div class="crew-copy"><div class="crew-name" id="crewName2"></div><div class="crew-role" id="crewRole2"></div></div>
       </article>
       <article class="crew-card">
         <img class="crew-photo" id="crewPhoto3" alt="">
+        <div class="crew-flag-fallback" id="crewFlag3" aria-hidden="true"></div>
         <div class="crew-copy"><div class="crew-name" id="crewName3"></div><div class="crew-role" id="crewRole3"></div></div>
       </article>
       <article class="crew-card">
         <img class="crew-photo" id="crewPhoto4" alt="">
+        <div class="crew-flag-fallback" id="crewFlag4" aria-hidden="true"></div>
         <div class="crew-copy"><div class="crew-name" id="crewName4"></div><div class="crew-role" id="crewRole4"></div></div>
       </article>
       <div class="team-logo-box">
-        <div class="team-logo-medallion"><img class="team-logo" id="teamLogo" alt=""></div>
-        <div class="team-id-copy"><div class="team-id-name" id="teamIdentityName"></div><div class="team-id-role">Team Logo</div></div>
-        <div class="team-flag" id="teamFlag"></div>
+        <div class="team-logo-medallion"><img class="team-logo" id="teamLogo" alt=""><div class="team-logo-overlay" id="teamLogoOverlay"></div></div>
       </div>
     </section>
     <section class="ticker"><div class="ticker-label">Top News</div><div class="ticker-track"><div class="ticker-content" id="tickerContent"></div></div></section>
@@ -76,9 +79,10 @@
     const teams = [
       {
         name: "Emirates Team New Zealand",
+        logoOverlay: "Defender",
         tag: "ETNZ",
         flag: "🇳🇿",
-        logo: "https://38th.americascup.com/assets/img/teams/ETNZ.png",
+        logo: "../assets/team-logos/etnz.png",
         crew: [
           ["Nathan Outteridge", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29288_Nathan-1.jpg"],
           ["Seb Menzies", "Helm", "https://www.americascup.com/original/m29287_Seb-1.jpg"],
@@ -91,58 +95,63 @@
         name: "La Roche-Posay Racing Team",
         tag: "RPRT",
         flag: "🇫🇷",
-        logo: "https://38th.americascup.com/assets/img/teams/RPRT.png",
+        logo: "../assets/team-logos/la-roche-posay-white.png",
         crew: [
           ["Quentin Delapierre", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29280_Quentin.jpg"],
           ["Diego Botin", "Port Helm", "https://www.americascup.com/original/m29279_DiegoBotin-1.jpg"],
           ["Jason Saunders", "Starboard Trim", "https://www.americascup.com/original/m29283_Jason.jpg"],
           ["Florian Trittel", "Port Trim", "https://www.americascup.com/original/m29281_Trittel.jpg"],
-          ["Enzo Balanger", "Reserve Helm", "https://www.americascup.com/original/m29284_Enzo.jpg"]
+          ["Enzo Balanger", "Reserve Helm", "https://www.americascup.com/original/m29284_Enzo.jpg"],
+          ["Timothe Lapauw", "Reserve Trimmer", "https://www.americascup.com/original/m29282_Lapauw.jpg"]
         ]
       },
       {
         name: "Tudor Team Alinghi",
         tag: "TTA",
         flag: "🇨🇭",
-        logo: "https://38th.americascup.com/assets/img/teams/TTA.png",
+        logo: "../assets/team-logos/alinghi.png",
         crew: [
           ["Paul Goodison", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29324_Goodison-1.jpg"],
           ["Phil Robertson", "Port Helm", "https://www.americascup.com/original/m29325_Robertson.jpg"],
           ["Pietro Sibello", "Trimmer", "https://www.americascup.com/original/m29322_Sibello.jpg"],
-          ["Nico Rolaz", "Trimmer", "https://www.americascup.com/original/m29323_Rolaz-1.jpg"]
+          ["Nico Rolaz", "Trimmer", "https://www.americascup.com/original/m29323_Rolaz-1.jpg"],
+          ["Bryan Mettraux", "Trimmer", "https://www.americascup.com/original/m29330_Mettraux.jpg"]
         ]
       },
       {
         name: "Luna Rossa 1 Women & Youth Team",
+        logoOverlay: "Women & Youth",
         tag: "LR1",
         flag: "🇮🇹",
-        logo: "https://38th.americascup.com/assets/img/teams/LRC.png",
+        logo: "../assets/team-logos/luna-rossa.png",
         crew: [
           ["Marco Gradoni", "Helm", "https://www.americascup.com/original/m29309_Gradoni-1.jpg"],
           ["Margherita Porro", "Helm", "https://www.americascup.com/original/m29310_Porro-1.jpg"],
           ["Maria Giubilei", "Trimmer", "https://www.americascup.com/original/m29308_Giulibei-1.jpg"],
           ["Giovanni Santi", "Trim", "https://www.americascup.com/original/m29311_Santii.jpg"],
-          ["Gianluigi Ugolini", "Helm", "https://www.americascup.com/original/m29317_Ugolini-1.jpg"]
+          ["Maria Vittoria Marchesini", "Trimmer", "https://www.americascup.com/original/m29318_Marchesi.jpg"],
+          ["Massimiliano Antoniazzi", "Trim", "https://www.americascup.com/original/m29312_Antoniazzi-1.jpg"]
         ]
       },
       {
         name: "Luna Rossa 2 Principal Team",
+        logoOverlay: "Principal Team",
         tag: "LR2",
         flag: "🇮🇹",
-        logo: "https://38th.americascup.com/assets/img/teams/LRC.png",
+        logo: "../assets/team-logos/luna-rossa.png",
         crew: [
           ["Peter Burling", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29315_Burling-1.jpg"],
           ["Ruggero Tita", "Helm", "https://www.americascup.com/original/m29316_Ruggero-1.jpg"],
-          ["Umberto Molineris", "Trimmer", "https://www.americascup.com/original/m29313_Molineris-1.jpg"],
-          ["Vittorio Bissaro", "Trimmer", "https://www.americascup.com/original/m29314_Bissaro-1.jpg"],
-          ["Gianluigi Ugolini", "Helm", "https://www.americascup.com/original/m29317_Ugolini-1.jpg"]
+          ["Umberto Molineris", "Trimmer", "https://www.americascup.com/original/m29313_Molinens-1.jpg"],
+          ["Vittorio Bissaro", "Trimmer", "https://www.americascup.com/original/m29314_Bisaro-1.jpg"],
+          ["Gianluigi Ugolini", "Helm", "https://www.americascup.com/original/m29317_Uggolini-1.jpg"]
         ]
       },
       {
         name: "Athena Pathway Women & Youth Team",
         tag: "ATHENA",
         flag: "🇬🇧",
-        logo: "https://38th.americascup.com/assets/img/teams/APWY.png",
+        logo: "../assets/team-logos/athena-pathway-dark.png",
         crew: [
           ["Hannah Mills OBE", "Skipper / Helm", "https://www.americascup.com/original/m29339_Hannah.jpg"],
           ["Ellie Aldridge", "Helm", "https://www.americascup.com/original/m29338_Ellie.jpg"],
@@ -154,7 +163,7 @@
         name: "GB1",
         tag: "GB1",
         flag: "🇬🇧",
-        logo: "https://38th.americascup.com/assets/img/teams/GB1.png",
+        logo: "../assets/team-logos/gb1-dark.png",
         crew: [
           ["Dylan Fletcher", "Skipper / Starboard Helm", "https://www.americascup.com/original/m29319_Fletcher.jpg"],
           ["Ben Cornish", "Port Helm", "https://www.americascup.com/original/m29335_Cornish.jpg"],
@@ -163,10 +172,35 @@
         ]
       },
       {
+        name: "American Racing Challenger",
+        tag: "ARC",
+        flag: "🇺🇸",
+        logo: "../assets/team-logos/american-racing-challenger.png",
+        crew: [
+          ["Giles Scott", "Sailing Director", "../assets/crew/giles-scott.png"],
+          ["Coming Soon", "Helm"],
+          ["Coming Soon", "Trimmer"],
+          ["Coming Soon", "Trimmer"]
+        ]
+      },
+      {
+        name: "Team Australia",
+        tag: "AUS",
+        flag: "🇦🇺",
+        logo: "../assets/team-logos/team-australia.avif",
+        crew: [
+          ["Tom Slingsby", "Head of Sailing", "../assets/crew/tom-slingsby.png"],
+          ["Coming Soon", "Helm"],
+          ["Coming Soon", "Trimmer"],
+          ["Coming Soon", "Trimmer"]
+        ]
+      },
+      {
         name: "Emirates Team New Zealand Women & Youth",
+        logoOverlay: "Women & Youth",
         tag: "ETNZ WY",
         flag: "🇳🇿",
-        logo: "https://38th.americascup.com/assets/img/teams/ETNZ.png",
+        logo: "../assets/team-logos/etnz.png",
         crew: [
           ["Jake Pye", "Skipper / Helm", "https://www.americascup.com/original/m29321_Pye.jpg"],
           ["Erica Dawson", "Helm", "https://www.americascup.com/original/m29332_Erica.jpg"],
@@ -176,11 +210,12 @@
       }
     ];
 
+    const rotationOrder = [0, 1, 3, 2, 9, 6, 4, 7, 5, 8];
+
     function renderTeam(index) {
-      const team = teams[index % teams.length];
-      teamName.textContent = team.name;
-      teamIdentityName.textContent = team.name;
-      teamFlag.textContent = team.flag || "";
+      const team = teams[rotationOrder[index % rotationOrder.length]];
+      teamLogoOverlay.textContent = team.logoOverlay || "";
+      teamLogoOverlay.classList.toggle("is-visible", Boolean(team.logoOverlay));
       teamLogo.src = team.logo;
       teamLogo.alt = team.name;
       teamLogo.style.visibility = "visible";
@@ -190,45 +225,150 @@
       for (let memberIndex = 0; memberIndex < 5; memberIndex++) {
         const member = team.crew[memberIndex];
         const photo = document.getElementById("crewPhoto" + memberIndex);
+        const flagFallback = document.getElementById("crewFlag" + memberIndex);
         const card = photo.closest(".crew-card");
         if (!member) {
+          if (memberIndex === 0 && team.crew.length === 0) {
+            card.classList.remove("is-empty");
+            card.classList.add("has-flag-fallback");
+            flagFallback.textContent = team.flag || "";
+            document.getElementById("crewName" + memberIndex).textContent = team.name;
+            document.getElementById("crewRole" + memberIndex).textContent = "Crew roster to follow";
+            photo.onerror = null;
+            photo.removeAttribute("src");
+            photo.alt = team.name;
+            photo.classList.add("is-flag-fallback");
+            continue;
+          }
           card.classList.add("is-empty");
+          card.classList.remove("has-flag-fallback");
+          flagFallback.textContent = "";
           photo.removeAttribute("src");
           photo.alt = "";
+          photo.classList.remove("is-flag-fallback");
           document.getElementById("crewName" + memberIndex).textContent = "";
           document.getElementById("crewRole" + memberIndex).textContent = "";
           continue;
         }
         card.classList.remove("is-empty");
+        card.classList.remove("has-flag-fallback");
+        flagFallback.textContent = "";
         document.getElementById("crewName" + memberIndex).textContent = member[0];
         document.getElementById("crewRole" + memberIndex).textContent = member[1];
+        photo.classList.remove("is-flag-fallback");
         photo.style.objectFit = "cover";
         photo.style.padding = "0";
+        if (!member[2]) {
+          photo.onerror = null;
+          photo.removeAttribute("src");
+          photo.alt = team.flag ? team.flag + " flag" : "Flag";
+          photo.style.objectFit = "";
+          photo.style.padding = "";
+          photo.classList.add("is-flag-fallback");
+          flagFallback.textContent = team.flag || "";
+          card.classList.add("has-flag-fallback");
+          continue;
+        }
         photo.onerror = () => {
           photo.onerror = null;
-          photo.src = team.logo;
-          photo.style.objectFit = "contain";
-          photo.style.padding = "14%";
+          photo.removeAttribute("src");
+          photo.alt = team.flag ? team.flag + " flag" : "Flag";
+          photo.style.objectFit = "";
+          photo.style.padding = "";
+          photo.classList.add("is-flag-fallback");
+          flagFallback.textContent = team.flag || "";
+          card.classList.add("has-flag-fallback");
         };
         photo.src = member[2];
         photo.alt = member[0];
       }
-      renderHeadlines([
-        team.name + " crew profile: " + team.crew.map(member => member[0]).join(", "),
-        team.crew[0][0] + " leads the " + team.name + " line-up",
-        team.crew[1][0] + " and " + team.crew[2][0] + " feature in the AC38 squad"
-      ], team.tag);
     }
 
-    function renderHeadlines(items, tag) {
-      const ticker = items.map(item => "<span><b>" + tag + "</b>" + item + "</span>").join("");
+    const RSS_CONFIG = {
+      feedUrl: "https://rss.app/feeds/H9b85gvlBGoYeY7d.xml",
+      corsProxy: "https://api.allorigins.win/raw?url=",
+      fallback: [
+        "Emirates Team New Zealand takes their first flight in the Bay of Naples",
+        "Welcoming the America's Cup - the most beautiful ship in the world",
+        "Luna Rossa's first sail in Naples",
+        "First sail for La Roche-Posay Racing Team",
+        "Naples, a natural amphitheatre for the America's Cup"
+      ]
+    };
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
+    }
+    function normalCase(value) {
+      const text = String(value || "").replace(/\s+/g, " ").trim();
+      const letters = text.replace(/[^A-Za-z]/g, "");
+      const upperRatio = letters ? [...letters].filter(letter => letter === letter.toUpperCase()).length / letters.length : 0;
+      if (upperRatio < 0.78) return text;
+      let sentence = text.toLowerCase();
+      const replacements = [
+        [/\bac38\b/g, "AC38"],
+        [/\bac40s?\b/g, match => match.endsWith("s") ? "AC40s" : "AC40"],
+        [/\bac75s?\b/g, match => match.endsWith("s") ? "AC75s" : "AC75"],
+        [/\bpr1\b/g, "PR1"],
+        [/\brss\b/g, "RSS"],
+        [/\brdm\b/g, "RDM"],
+        [/\bgb1\b/g, "GB1"],
+        [/\bnaples\b/g, "Naples"],
+        [/\bcagliari\b/g, "Cagliari"],
+        [/\bluna rossa\b/g, "Luna Rossa"],
+        [/\bla roche-posay\b/g, "La Roche-Posay"],
+        [/\bemirates team new zealand\b/g, "Emirates Team New Zealand"],
+        [/\bemirates\b/g, "Emirates"],
+        [/\blouis vuitton cup\b/g, "Louis Vuitton Cup"],
+        [/\bnew zealand\b/g, "New Zealand"],
+        [/\blouis vuitton\b/g, "Louis Vuitton"],
+        [/\bamerica’s cup\b/g, "America’s Cup"],
+        [/\bamerica's cup\b/g, "America's Cup"],
+        [/\bitaly\b/g, "Italy"],
+        [/\bfrance\b/g, "France"],
+        [/\bsardinia\b/g, "Sardinia"],
+        [/\bwomen’s\b/g, "women’s"],
+        [/\bwomen's\b/g, "women's"]
+      ];
+      replacements.forEach(([pattern, replacement]) => {
+        sentence = sentence.replace(pattern, replacement);
+      });
+      return sentence.replace(/^([a-z])/, match => match.toUpperCase());
+    }
+    function renderHeadlines(items) {
+      const safeItems = items.filter(Boolean).slice(0, 12);
+      const ticker = safeItems.map(item => "<span><b>AC38</b>" + escapeHtml(normalCase(item)) + "</span>").join("");
       tickerContent.innerHTML = ticker + ticker;
+    }
+    async function fetchTextWithProxyFallback(url) {
+      try {
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error("Direct RSS failed");
+        return response.text();
+      } catch (error) {
+        const response = await fetch(RSS_CONFIG.corsProxy + encodeURIComponent(url), { cache: "no-store" });
+        if (!response.ok) throw new Error("Proxy RSS failed");
+        return response.text();
+      }
+    }
+    function parseFeedTitles(xml) {
+      const doc = new DOMParser().parseFromString(xml, "text/xml");
+      return [...doc.querySelectorAll("item")].map(item => normalCase(item.querySelector("title")?.textContent)).filter(Boolean);
+    }
+    async function loadTickerFeed() {
+      renderHeadlines(RSS_CONFIG.fallback);
+      try {
+        const xml = await fetchTextWithProxyFallback(RSS_CONFIG.feedUrl);
+        const titles = parseFeedTitles(xml);
+        if (titles.length) renderHeadlines(titles);
+      } catch (error) {}
     }
 
     let teamIndex = 0;
     renderTeam(teamIndex);
+    loadTickerFeed();
+    setInterval(loadTickerFeed, 15 * 60 * 1000);
     setInterval(() => {
-      teamIndex = (teamIndex + 1) % teams.length;
+      teamIndex = (teamIndex + 1) % rotationOrder.length;
       renderTeam(teamIndex);
     }, 12000);
   </script>

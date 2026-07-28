@@ -21,6 +21,7 @@ The full-browser review pages are:
 
 - `/previews/meet-teams.html`
 - `/previews/standings.html`
+- `/previews/weather-symbols.html`
 
 ## Local Preview
 

@@ -43,9 +43,86 @@
     <section class="ticker"><div class="ticker-label">Top News</div><div class="ticker-track"><div class="ticker-content" id="tickerContent"></div></div></section>
   </div>
   <script>
-    const headlines = ["Emirates Team New Zealand takes their first flight in the Bay of Naples", "Welcoming the America's Cup - the most beautiful ship in the world", "Luna Rossa's first sail in Naples", "First sail for La Roche-Posay Racing Team", "Naples, a natural amphitheatre for the America's Cup"];
-    function renderHeadlines(items) { const ticker = items.map(item => '<span><b>AC38</b>' + item + '</span>').join(''); tickerContent.innerHTML = ticker + ticker; }
-    renderHeadlines(headlines);
+    const RSS_CONFIG = {
+      feedUrl: "https://rss.app/feeds/H9b85gvlBGoYeY7d.xml",
+      corsProxy: "https://api.allorigins.win/raw?url=",
+      fallback: [
+        "Emirates Team New Zealand takes their first flight in the Bay of Naples",
+        "Welcoming the America's Cup - the most beautiful ship in the world",
+        "Luna Rossa's first sail in Naples",
+        "First sail for La Roche-Posay Racing Team",
+        "Naples, a natural amphitheatre for the America's Cup"
+      ]
+    };
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
+    }
+    function normalCase(value) {
+      const text = String(value || "").replace(/\s+/g, " ").trim();
+      const letters = text.replace(/[^A-Za-z]/g, "");
+      const upperRatio = letters ? [...letters].filter(letter => letter === letter.toUpperCase()).length / letters.length : 0;
+      if (upperRatio < 0.78) return text;
+      let sentence = text.toLowerCase();
+      const replacements = [
+        [/\bac38\b/g, "AC38"],
+        [/\bac40s?\b/g, match => match.endsWith("s") ? "AC40s" : "AC40"],
+        [/\bac75s?\b/g, match => match.endsWith("s") ? "AC75s" : "AC75"],
+        [/\bpr1\b/g, "PR1"],
+        [/\brss\b/g, "RSS"],
+        [/\brdm\b/g, "RDM"],
+        [/\bgb1\b/g, "GB1"],
+        [/\bnaples\b/g, "Naples"],
+        [/\bcagliari\b/g, "Cagliari"],
+        [/\bluna rossa\b/g, "Luna Rossa"],
+        [/\bla roche-posay\b/g, "La Roche-Posay"],
+        [/\bemirates team new zealand\b/g, "Emirates Team New Zealand"],
+        [/\bemirates\b/g, "Emirates"],
+        [/\blouis vuitton cup\b/g, "Louis Vuitton Cup"],
+        [/\bnew zealand\b/g, "New Zealand"],
+        [/\blouis vuitton\b/g, "Louis Vuitton"],
+        [/\bamerica’s cup\b/g, "America’s Cup"],
+        [/\bamerica's cup\b/g, "America's Cup"],
+        [/\bitaly\b/g, "Italy"],
+        [/\bfrance\b/g, "France"],
+        [/\bsardinia\b/g, "Sardinia"],
+        [/\bwomen’s\b/g, "women’s"],
+        [/\bwomen's\b/g, "women's"]
+      ];
+      replacements.forEach(([pattern, replacement]) => {
+        sentence = sentence.replace(pattern, replacement);
+      });
+      return sentence.replace(/^([a-z])/, match => match.toUpperCase());
+    }
+    function renderHeadlines(items) {
+      const safeItems = items.filter(Boolean).slice(0, 12);
+      const ticker = safeItems.map(item => '<span><b>AC38</b>' + escapeHtml(normalCase(item)) + '</span>').join('');
+      tickerContent.innerHTML = ticker + ticker;
+    }
+    async function fetchTextWithProxyFallback(url) {
+      try {
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error("Direct RSS failed");
+        return response.text();
+      } catch (error) {
+        const response = await fetch(RSS_CONFIG.corsProxy + encodeURIComponent(url), { cache: "no-store" });
+        if (!response.ok) throw new Error("Proxy RSS failed");
+        return response.text();
+      }
+    }
+    function parseFeedTitles(xml) {
+      const doc = new DOMParser().parseFromString(xml, "text/xml");
+      return [...doc.querySelectorAll("item")].map(item => normalCase(item.querySelector("title")?.textContent)).filter(Boolean);
+    }
+    async function loadTickerFeed() {
+      renderHeadlines(RSS_CONFIG.fallback);
+      try {
+        const xml = await fetchTextWithProxyFallback(RSS_CONFIG.feedUrl);
+        const titles = parseFeedTitles(xml);
+        if (titles.length) renderHeadlines(titles);
+      } catch (error) {}
+    }
+    loadTickerFeed();
+    setInterval(loadTickerFeed, 15 * 60 * 1000);
   </script>
 </body>
 </html>
